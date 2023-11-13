@@ -5,7 +5,9 @@ __This repository displays__: the intended structure of our codebase
 
 ## Retrieving the data locally:
 
-(1) Download the data file <file_name> from <site_url>
+(1) Download the data file **zbp_data.rar** from DSMLP team b10 group directory
+
+(2) Extract all into src/data/raw
 
 
 ## Running the project
