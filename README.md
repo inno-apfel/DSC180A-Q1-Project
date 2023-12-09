@@ -1,4 +1,4 @@
-# Business Growth Forecasting Research using U.S. Census County Business Patterns Data
+# Employment Forecasting Research using U.S. Census Data
 
 ## Overview
 
