@@ -42,6 +42,7 @@ def main(targets):
         print('-----------------------------------------------------------')
         print(f"Models will be trained on data from {min(params['years'])} to <input-year>")
         print(f"Models will be evaluated on data from <input-year> to {max(params['years'])}")
+        print(f"Prediction visualizations will be generated for {max(params['years'])}")
         print(f"Current year range for available data: {min(params['years'])} - {max(params['years'])}")
         print('-----------------------------------------------------------')
         end_year = int(input('(input-year): '))
