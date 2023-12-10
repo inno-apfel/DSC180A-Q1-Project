@@ -7,7 +7,21 @@ This repository serves as a codebase for our machine learning employment forecas
 
 ## Setting up the Enviroment
 
-* To install the dependencies, run the following command from the root directory of the project: `pip install -r requirements.txt`
+To begin running our models, you must first replicate our virtual enviroment. To do so, follow the below steps:
+
+1. Clone the repository and navigate to the project directory:
+
+   ```
+   git clone https://github.com/inno-apfel/DSC180A-Q1-Project.git
+   cd DSC180A-Q1-Project
+   ```
+
+2. Create and activate a conda enviroment from the provided `enviroment.yml` file:
+
+   ```
+   conda env create -f enviroment.yml
+   conda activate dsc180-capstone
+   ```
 
 
 ## Retrieving the Data Locally:
