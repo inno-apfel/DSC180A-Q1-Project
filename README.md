@@ -4,6 +4,11 @@
 
 This repository serves as a codebase for our machine learning employment forecasting models, developed in partnership with The San Diego Association of Government (SANDAG).
 
+There are currently two ways you can interact with our work:
+
+1. Exploring our work through our development interactive python notebooks
+2. Interacting with our executable script `run.py` to recreate the results we found in `report.pdf`.
+
 
 ## Setting up the Enviroment
 
