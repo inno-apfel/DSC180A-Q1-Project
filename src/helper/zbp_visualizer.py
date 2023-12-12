@@ -5,6 +5,25 @@ import plotly.express as px
 from IPython.display import IFrame
 
 def generate_zbp_chloropleth(data, group, value, tag):
+    """
+    Generates a chloropleth map of the USA by ZIP Code
+
+    Parameters
+    ----------
+    data: pandas.DataFrame
+        The data used to generate a chloropleth.
+    group: str
+        The name of the column in data denoting ZIP Code.
+    value: str
+        The name of the column in data denoting the value you want to display.
+    tag: str
+        The suffix you want to add to the file name of the generated plot.
+        
+    Out
+    ---
+    zbp_plot_{tag}: HTML file
+        The generated chloropleth map
+    """
     df = data.groupby(group)[value].sum().reset_index()[[group, value]]
     
     with urlopen('https://raw.githubusercontent.com/OpenDataDE/State-zip-code-GeoJSON/master/ca_california_zip_codes_geo.min.json') as response:
