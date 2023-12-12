@@ -2,6 +2,15 @@ import numpy as np
 import pandas as pd
 
 def run():
+    """
+    Produces the necessary features used for our forecasting models
+
+    Out
+    ---
+    zbp_totals_with_features: CSV file
+        A master dataset indexed by ZIP Code, containing information from ZBP Details and Totals datasets
+        alongside the features: [naics_x_pct, ni_j_pct]
+    """
     # LOAD PROCESSED DATA
     zbp_details_file_path = 'src/data/temp/processed_zbp_detail_data.csv'
     zbp_detail = pd.read_csv(zbp_details_file_path)
