@@ -49,3 +49,5 @@ To use our forecasting models, run the `run.py` script from your terminal with t
 ## Contributors
 
 - [Maximilian Wei](https://www.linkedin.com/in/maxhtwei/)
+- [Mariana Montoya](https://www.linkedin.com/in/mariana-montoya11/)
+- [Michael Lue](https://www.linkedin.com/in/michael-lue-6ba799201/)
