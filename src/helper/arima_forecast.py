@@ -6,8 +6,29 @@ import warnings
 warnings.filterwarnings('ignore')
 
 class ARIMAForecast():
+    """
+    An object that represents a collection of ARIMA models that predicts employment counts, 
+    where one model is trained for each ZIP Code in the provided data.
+    """
     
     def __init__(self, data, n_lag_terms ,diff_order ,window_size):
+        """
+        Constructor for the ARIMAForecast class
+
+        Parameters
+        ----------
+        data: pandas.DataFrame
+            The data to train on
+        n_lag_terms: int
+            The number of lag terms to include in each ARIMA model
+            Autoregressive component used for statsmodels.tsa.arima.model.ARIMA
+        diff_order: int or List[int]
+            The order of differencing to be done on data before training the ARIMA model
+            Differencing component used for statsmodels.tsa.arima.model.ARIMA
+        window_size: int or List[int]
+            The width of each window that the ARIMA model looks at
+            Moving average component used for statsmodels.tsa.arima.model.ARIMA
+        """
         self.data = data
         self.models = {}
         self.n_lag_terms = n_lag_terms
@@ -15,6 +36,10 @@ class ARIMAForecast():
         self.window_size = window_size
         
     def train(self):
+        """
+        Trains X ARIMA models on data provided during object instantiation, 
+        where X is the number of unique ZIP Codes in the data.
+        """
         for zip_code in self.data['zip'].unique():
             # filter
             curr_data = self.data[self.data['zip']==zip_code][['year', 'emp']].set_index('year')
@@ -28,6 +53,21 @@ class ARIMAForecast():
                 pass
             
     def forecast(self, year):
+        """
+        Makes predictions for employment counts for every ZIP Code in the provided data, 
+        for all years between the last year in the provided data and a given year (inclusive).
+
+        Parameters
+        ----------
+        year: int
+            The year to make predictions up to
+
+        Returns
+        -------
+        pandas.DataFrame
+            A table containing the forecast results. 
+            Containing the columns: ['zip', 'year', 'emp']
+        """
         preds = []
         # last year seen in the training set
         # used to calculate start range for forecast, to avoid predicting values in training set
