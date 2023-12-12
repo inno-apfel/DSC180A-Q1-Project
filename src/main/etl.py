@@ -3,9 +3,45 @@ import pandas as pd
 import json
 
 def is_2dig_naics(naics_code):
+    """
+    Determines if the first 2 characters in a given string is a 2-digit NAICS code
+
+    Parameters
+    ----------
+    naics_code: str
+        The input string to evaluate.
+    
+    Returns
+    -------
+        boolean
+            Whether or not the first 2 chars of naics_code is a valid NAICS code.
+    """
     return naics_code[:2].isnumeric() and not any(char.isdigit() for char in naics_code[2:])
 
 def process_zbp_details(data, year, zip_codes):
+    """
+    Processes and standardizes a ZIP Code Industry Details dataset from the U.S. Census' County Business Patterns Data
+
+    Parameters
+    ----------
+    data: pandas.DataFrame
+        The dataset to process
+    year: int
+        The year that this data refers to
+    zip_codes: List[int]
+        The zip_codes to include in processed data
+
+    Returns
+    -------
+    pandas.DataFrame
+        The input data after being processed for:
+        - filter out irrelavent ZIP Codes
+        - standardize column names
+        - filter out NaN values
+        - convert 8 digit NAICS codes to 2 digit
+        - determine and reinforce data types
+        - removing definition columns
+    """
     cols = ['zip', 'naics', 'est']
     # column 'n<5' change to 'n1_4' in 2016
     if year <= 2016:
@@ -26,6 +62,27 @@ def process_zbp_details(data, year, zip_codes):
     return data
 
 def process_zbp_totals(data, year, zip_codes):
+    """
+    Processes and standardizes a ZIP Code Totals dataset from the U.S. Census' County Business Patterns Data
+    
+    Parameters
+    ----------
+    data: pandas.DataFrame
+        The dataset to process
+    year: int
+        The year that this data refers to
+    zip_codes: List[int]
+        The zip_codes to include in processed data
+
+    Returns
+    -------
+    pandas.DataFrame
+        The input data after being processed for:
+        - filter out irrelavent ZIP Codes
+        - standardize column names
+        - determine and reinforce data types
+        - removing definition columns
+    """
     cols_to_drop = ['name', 'city', 'stabbr', 'cty_name']
     # new descriptive column 'empflag' introduced to CBP after 2017
     # removed along with other descriptive columns 
@@ -38,6 +95,16 @@ def process_zbp_totals(data, year, zip_codes):
 
 
 def run():
+    """
+    Processes and merges all ZIP Code Industry Details and Totals datasets in the data/raw/zbp_data directory.
+
+    Out
+    -----
+    processed_zbp_detail_data: CSV file
+        Combined processed data for all ZIP Code Industry Details data 
+    processed_zbp_totals_data: CSV file
+        Combined processed data for all ZIP Code Totals data 
+    """
     with open('config/config.json', 'r') as fh:
         params = json.load(fh)
 
