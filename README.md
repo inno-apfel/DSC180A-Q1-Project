@@ -35,7 +35,7 @@ Before running our forecasting models, you must set up a few required datasets. 
 
 To access the included data, extract the compressed data into the directory `src/data`. The result should be the creation of the `raw` folder within the data directory.
 
-Last Updated: 12/9/2023
+Last Updated: 01/23/2024
 
   
 ## Running the Project
