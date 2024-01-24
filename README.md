@@ -31,7 +31,7 @@ To begin running our models, you must first replicate our virtual enviroment. To
 
 ## Retrieving the Data Locally:
 
-Before running our forecasting models, you must set up a few required datasets. Our models are built on the [Census Bureau County Business Patterns](https://www.census.gov/programs-surveys/cbp/data/datasets.All.List_1222676053.html) zip-code industry details totals datasets, and compared against [SANDAG's Series 14 Forecasts on Jobs by ZIP Code](https://opendata.sandag.org/Forecast/Series-14-Forecasts-Jobs-by-ZIP-Code/gzcd-xn9p/about_data). For ease of use and reproducibility, a mirror of the datasets we used can be obtained [(here)](https://drive.google.com/file/d/1VYtJXJOHdor53l4ga_9xIvyeyWZfdBci/view?usp=sharing).
+Before running our forecasting models, you must set up a few required datasets. Our models are built on the [Census Bureau County Business Patterns](https://www.census.gov/programs-surveys/cbp/data/datasets.All.List_1222676053.html) zip-code industry details totals datasets, and compared against [SANDAG's Series 14 Forecasts on Jobs by ZIP Code](https://opendata.sandag.org/Forecast/Series-14-Forecasts-Jobs-by-ZIP-Code/gzcd-xn9p/about_data). For ease of use and reproducibility, a mirror of the datasets we used can be obtained [(here)](https://drive.google.com/file/d/1z7l_f5Wc58IxF5J4_qT7cdDe9sx3216D/view?usp=sharing).
 
 To access the included data, extract the compressed data into the directory `src/data`. The result should be the creation of the `raw` folder within the data directory.
 
