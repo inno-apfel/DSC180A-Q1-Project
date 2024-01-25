@@ -11,6 +11,7 @@ import zbp_totals_processing
 import household_income_processing
 import population_counts_processing
 import retirement_processing
+import household_counts_processing
 
 
 def run(params):
@@ -31,6 +32,7 @@ def run(params):
     hh_income_by_year = {}
     total_pop_by_year = {}
     retire_by_year = {}
+    household_counts_by_year = {}
     for year in params['years']:
         shortened_year = str(year)[2:]
         detail_encoding = None
@@ -44,6 +46,7 @@ def run(params):
         hh_income_by_year[year] = pd.read_csv(f'src/data/raw/household_data/ACSST5Y{year}.csv')
         total_pop_by_year[year] = pd.read_csv(f'src/data/raw/pop_age_data/ACSDP5Y{year}.csv')
         retire_by_year[year] = pd.read_csv(f'src/data/raw/retire_data/pop{year}.csv')
+        household_counts_by_year[year] = pd.read_csv(f'src/data/raw/acs_data/household_counts_data/household_counts_{year}.csv', skiprows=1)
 
     # PROCESS AND CONCATENATE DATA
     for year in zbp_detail_by_year:
@@ -60,6 +63,9 @@ def run(params):
 
     for year in retire_by_year:
         retire_by_year[year] = retirement_processing.process_retire_data(retire_by_year[year], year, params)
+
+    for year in household_counts_by_year:
+        household_counts_by_year[year] = household_counts_processing.process_household_counts_data(household_counts_by_year[year], year, params)
     
     # SAVE PROCESSED DATA
     zbp_detail_data = pd.concat(list(zbp_detail_by_year.values()), ignore_index=True).reset_index(drop=True)
@@ -76,6 +82,9 @@ def run(params):
 
     retire_data = pd.concat(list(retire_by_year.values()), ignore_index=True).reset_index(drop=True)
     retire_data.to_csv('src/data/temp/processed_retire_detail_data.csv', index=False)
+
+    household_counts_data = pd.concat(list(household_counts_by_year.values()), ignore_index=True).reset_index(drop=True)
+    household_counts_data.to_csv('src/data/temp/processed_household_counts_data.csv', index=False)
 
 
 if __name__ == '__main__':
