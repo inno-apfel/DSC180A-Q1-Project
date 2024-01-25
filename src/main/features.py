@@ -52,6 +52,22 @@ def run():
 
     zbp_totals_with_features.to_csv('src/data/temp/zbp_totals_with_features.csv', index=False)
 
+    # create lagged dataset
+    def lag_all_zip_codes(data, cols_not_to_lag):
+        def create_lagged_dataset(data, cols_not_to_lag):
+            cols_to_lag = data.columns.drop(cols_not_to_lag)
+            return data[cols_not_to_lag].join(data[cols_to_lag].shift(1), how='inner')
+        temp = []
+        for curr_zip in data['zip'].unique():
+            curr_zip_data = data[data['zip']==curr_zip].sort_values('year')
+            temp += [create_lagged_dataset(curr_zip_data, cols_not_to_lag).iloc[1:,:]]
+            
+        return pd.concat(temp, ignore_index=True).reset_index(drop=True)
+    
+    data = pd.read_csv('src/data/temp/zbp_totals_with_features.csv')
+    lagged = lag_all_zip_codes(data, ['zip', 'year', 'est'])
+    lagged.to_csv('src/data/temp/lagged_zbp_totals_with_features.csv')
+
 
 if __name__ == '__main__':
     run()
