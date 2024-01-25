@@ -66,7 +66,7 @@ def run():
     
     data = pd.read_csv('src/data/temp/zbp_totals_with_features.csv')
     lagged = lag_all_zip_codes(data, ['zip', 'year', 'est'])
-    lagged.to_csv('src/data/temp/lagged_zbp_totals_with_features.csv')
+    lagged.to_csv('src/data/temp/lagged_zbp_totals_with_features.csv', index=False)
 
 
 if __name__ == '__main__':
