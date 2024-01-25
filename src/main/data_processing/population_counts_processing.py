@@ -33,4 +33,7 @@ def process_pop(data, year, params):
     pop['Total population'] = pop['Total population'].apply(reformat_pop)
     # Keeping only relevant zip-codes
     pop = pop[pop['zip'].apply(lambda x: x in params['zip_codes'])]
+
+    pop = pop.rename(columns={'Total population': 'total_population'})
+
     return pop
