@@ -18,6 +18,15 @@ def run():
     zbp_totals_file_path = 'src/data/temp/processed_zbp_totals_data.csv'
     zbp_totals = pd.read_csv(zbp_totals_file_path)
 
+    hh_income_file_path = 'src/data/temp/processed_hh_income_data.csv'
+    hh_income_data = pd.read_csv(hh_income_file_path)
+
+    total_pop_file_path = 'src/data/temp/processed_total_pop_data.csv'
+    total_pop_data = pd.read_csv(total_pop_file_path)
+
+    retire_file_path = 'src/data/temp/processed_retire_detail_data.csv'
+    retire_data = pd.read_csv(retire_file_path)
+
     # PRODUCE FEATURES FOR ZIP-CODE LEVEL INDUSTRY DATA
     # naics_x_pct = num of establishments from industry x in zipcode / total num of establishments in zipcode
     zip_est = zbp_detail.groupby(['zip', 'year'])['est'].sum()
@@ -32,6 +41,10 @@ def run():
     # MERGE CREATE FEATURES WITH MAIN DATASET (ZBP_TOTALS)
     zbp_totals_with_features = zbp_totals.merge(naics_percentages, on=['zip', 'year'])
     zbp_totals_with_features = zbp_totals_with_features.merge(est_size_percentages, on=['zip', 'year'])
+    zbp_totals_with_features = zbp_totals_with_features.merge(hh_income_data, on=['zip', 'year'])
+    zbp_totals_with_features = zbp_totals_with_features.merge(total_pop_data, on=['zip', 'year'])
+    zbp_totals_with_features = zbp_totals_with_features.merge(retire_data, on=['zip', 'year'])
+
     zbp_totals_with_features.to_csv('src/data/temp/zbp_totals_with_features.csv', index=False)
 
 
