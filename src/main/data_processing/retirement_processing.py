@@ -2,10 +2,6 @@ import numpy as np
 import pandas as pd
 
 
-    
-    # data = data.drop(columns=['total_population'])
-
-
 def process_retire_data(data, year, params):
     
     column_names = data.columns
