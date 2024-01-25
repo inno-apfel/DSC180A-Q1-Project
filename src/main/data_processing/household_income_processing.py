@@ -30,4 +30,6 @@ def process_hh(data, year, params):
     hh2012['zip'] = hh2012['zip'].astype('int64')
     # Keeping only relevant zip-codes
     hh2012 = hh2012[hh2012['zip'].apply(lambda x: x in params['zip_codes'])]
+    hh2012 = hh2012.rename({'Median income (dollars)': 'median_hh_income',
+                            'Total population': 'total_population'})
     return hh2012

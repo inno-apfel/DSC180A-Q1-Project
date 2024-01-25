@@ -34,5 +34,11 @@ def process_retire_data(data, year, params):
     data = data.assign(year=np.full(data.shape[0], year))
     # Keeping only relevant zip-codes
     data = data[data['zip'].apply(lambda x: x in params['zip_codes'])]
+    data = data.rename({'Total population': 'total_population',
+                        'Total Retirement': 'total_retirement',
+                         '65 to 74 years': 'population_between_65_to_74',
+                         '75 to 84 years': 'population_between_75_to_84',
+                         '85 years and over': 'population_85_and_older'})
+    data = data.drop(columns=['total_population'])
     
     return data
