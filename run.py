@@ -28,7 +28,7 @@ def main(targets):
 
     if run_all or ('data' in targets):
         print('current running: data')
-        etl.run()
+        etl.run(params)
         print('DONE')
 
     if run_all or ('features' in targets):
