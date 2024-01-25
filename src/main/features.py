@@ -45,6 +45,11 @@ def run():
     zbp_totals_with_features = zbp_totals_with_features.merge(total_pop_data, on=['zip', 'year'])
     zbp_totals_with_features = zbp_totals_with_features.merge(retire_data, on=['zip', 'year'])
 
+    # drop zip codes with insufficient observations (<5)
+    zip_code_by_num_observations = zbp_totals_with_features.groupby('zip')['year'].count().sort_values()
+    zip_codes_with_insufficient_observations = zip_code_by_num_observations[zip_code_by_num_observations<=5].index
+    zbp_totals_with_features = zbp_totals_with_features[zbp_totals_with_features['zip'].apply(lambda x: x not in zip_codes_with_insufficient_observations)]
+
     zbp_totals_with_features.to_csv('src/data/temp/zbp_totals_with_features.csv', index=False)
 
 
