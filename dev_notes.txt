@@ -1,0 +1,3 @@
+all file paths for code under 'src' assume calling from the root folder
+- follow this assumption when developing new code
+- do not hard code '../'s to go up a directory
