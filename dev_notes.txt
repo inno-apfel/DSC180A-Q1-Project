@@ -9,6 +9,10 @@ Run all code from run.py
 EXTRA NOTES
 -----------
 
-all file paths for code under 'src' assume calling from the root folder
+Ensure all notebook work is pushed to main correctly
+- run 'Restart & Run All' to ensure the notebook runs sequentially
+- then run 'Restart & Clear Output' to ensure only code changes are reflected on github
+
+All file paths for code under 'src' assume calling from the root folder
 - follow this assumption when developing new code
 - do not hard code '../'s to go up a directory
