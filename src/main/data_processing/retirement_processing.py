@@ -39,7 +39,8 @@ def process_retire_data(data, year, params):
     # retirement col
     data['total_retirement'] = data['65 to 74 years'] + data['75 to 84 years'] + data['85 years and over']
     # midcareer col
-    data['total_midcareer'] = data['25 to 34 years'] + data['35 to 44 years']
+    data['total_midcareer (25-34)'] = data['25 to 34 years']
+    data['total_midcareer (35-44)'] = data['35 to 44 years']
     
     data = data.rename(columns={'Total population': 'total_population'})
     data = data.drop(columns=['total_population', '25 to 34 years', '35 to 44 years', '65 to 74 years', '75 to 84 years', '85 years and over'])
