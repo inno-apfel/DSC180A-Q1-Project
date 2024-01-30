@@ -1,19 +1,49 @@
 import numpy as np
 import pandas as pd
 
-#Removing commas from population strings before converting to floats.
 def reformat_pop(x):
+    """
+    Reformats and converts to int, string representations of population counts
+
+    Parameters
+    ----------
+    x: str
+        String representation of population count
+
+    Returns
+    -------
+    str:
+        Cleaned integer representation of population count
+
+    Example
+    -------
+        >>> reformat_pop('1,234')
+        1234
+    """
     return float(x.replace(',', ''))
 
 # Reformats zip column to be  5 digit zip code
 def reformat_zip(x):
     return x[6:11]
 
-def float_check(x):
-    return isinstance(x, float)
-
-#Function for processing population data by year
 def process_pop(data, year, params):
+    """
+    Processes a single dataset in src/data/raw/pop_age_data.
+
+    Parameters
+    ----------
+    data: pandas.DataFrame
+        The dataset to processes
+    year: int
+        The year corresponding to the current dataset
+    params: dict
+        Python dict representation of config/config.json
+
+    Returns
+    -------
+    pandas.DataFrame:
+        Dataset with columns ['zip', 'total_population', 'year']
+    """
     pop = data.T
     pop.columns = pop.iloc[0]
     pop = pop.drop(pop.index[0])

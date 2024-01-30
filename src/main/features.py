@@ -3,13 +3,15 @@ import pandas as pd
 
 def run():
     """
-    Produces the necessary features used for our forecasting models
+    Runs necessary transformation on our processed data to produce the features and final dataset used by our forecasting models
 
     Out
     ---
     zbp_totals_with_features: CSV file
         A master dataset indexed by ZIP Code, containing information from ZBP Details and Totals datasets
         alongside the features: [naics_x_pct, ni_j_pct]
+    lagged_zbp_totals_with_features: CSV file
+        zbp_totals_with_features where all features except ['zip', 'year', 'est'] are lagged by one year
     """
     # LOAD PROCESSED DATA
     zbp_details_file_path = 'src/data/temp/processed_zbp_detail_data.csv'

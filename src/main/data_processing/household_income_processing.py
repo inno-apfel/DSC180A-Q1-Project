@@ -1,17 +1,67 @@
 import numpy as np
 import pandas as pd
 
-# Reformats zip column to be  5 digit zip code
 def reformat_zip(x):
+    """
+    Reformats ZIP Codes from Census 5-Digit ZIP Code Tabulation Area (ZCTA5) format to simple 5-Digit representation.
+
+    Parameters
+    ----------
+    x: str
+        ZIP code represented in the format 'ZCTA5 XXXXX'
+
+    Returns
+    -------
+    str:
+        ZIP code in 5-digit representation
+
+    Example
+    -------
+        >>> reformat_zip('ZTAC5 91765')
+        91765
+    """
     return x[6:11]
 
-# Median household incomes 250000+ reformatted to 250000 and commas removed to convert object types to ints
 def reformat_income(x):
+    """
+    Reformats and converts to int, string representations of median household incomes
+
+    Parameters
+    ----------
+    x: str
+        String representation of median household income
+
+    Returns
+    -------
+    str:
+        Cleaned integer representation of median household income
+
+    Example
+    -------
+        >>> reformat_income('250,000+')
+        250000
+    """
     x = x.replace('+', '')
     return int(x.replace(',', ''))
 
-# FUNCTION FOR PROCESSING HOUSEHOLD INCOME BY INPUT YEAR
 def process_hh(data, year, params):
+    """
+    Processes a single dataset in src/data/raw/household_data.
+
+    Parameters
+    ----------
+    data: pandas.DataFrame
+        The dataset to processes
+    year: int
+        The year corresponding to the current dataset
+    params: dict
+        Python dict representation of config/config.json
+
+    Returns
+    -------
+    pandas.DataFrame:
+        Dataset with columns ['zip', 'median_hh_income', 'year']
+    """
     hh2012 = data.T
     hh2012.columns = hh2012.iloc[0]
     hh2012 = hh2012.drop(hh2012.index[0])

@@ -16,8 +16,8 @@ def generate_zbp_chloropleth(data, group, value, outpath):
         The name of the column in data denoting ZIP Code.
     value: str
         The name of the column in data denoting the value you want to display.
-    tag: str
-        The suffix you want to add to the file name of the generated plot.
+    outpath: str
+        The filepath to save the generated plot at.
         
     Out
     ---

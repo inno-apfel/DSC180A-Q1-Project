@@ -3,6 +3,23 @@ import pandas as pd
 
 
 def process_retire_data(data, year, params):
+    """
+    Processes a single dataset in src/data/raw/retire_data.
+
+    Parameters
+    ----------
+    data: pandas.DataFrame
+        The dataset to processes
+    year: int
+        The year corresponding to the current dataset
+    params: dict
+        Python dict representation of config/config.json
+
+    Returns
+    -------
+    pandas.DataFrame:
+        Dataset with columns ['zip', 'year', 'total_retirement', 'total_midcareer (25-34)', 'total_midcareer (35-44)']
+    """
     
     column_names = data.columns
     # Only getting Estimates

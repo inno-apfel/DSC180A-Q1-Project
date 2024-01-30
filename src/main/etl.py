@@ -17,7 +17,7 @@ import unemployment_processing
 
 def run(params):
     """
-    Processes and merges all ZIP Code Industry Details and Totals datasets in the data/raw/zbp_data directory.
+    Processes all datasets in the src/data/raw/ directory, saving their processed states in src/data/temp/.
 
     Out
     -----
@@ -25,6 +25,16 @@ def run(params):
         Combined processed data for all ZIP Code Industry Details data 
     processed_zbp_totals_data: CSV file
         Combined processed data for all ZIP Code Totals data 
+    processed_hh_income_data: CSV file
+        Dataset containing median household income data by (zip, year) pairs
+    processed_total_pop_data: CSV file
+        Dataset containing total population count data by (zip, year) pairs
+    processed_retire_detail_data: CSV file
+        Dataset containing population count data binned by age demographics by (zip, year) pairs
+    processed_household_counts_data: CSV file
+        Dataset containing total household counts data by (zip, year) pairs
+    processed_unemployment_data: CSV file
+        Dataset containing unemployment rates by year for the San Diego County
     """
     
     # LOAD DATA
