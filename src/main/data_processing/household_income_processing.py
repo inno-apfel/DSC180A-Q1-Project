@@ -1,48 +1,11 @@
+import sys
+sys.path.insert(0, 'src/helper')
+
 import numpy as np
 import pandas as pd
 
-def reformat_zip(x):
-    """
-    Reformats ZIP Codes from Census 5-Digit ZIP Code Tabulation Area (ZCTA5) format to simple 5-Digit representation.
-
-    Parameters
-    ----------
-    x: str
-        ZIP code represented in the format 'ZCTA5 XXXXX'
-
-    Returns
-    -------
-    str:
-        ZIP code in 5-digit representation
-
-    Example
-    -------
-        >>> reformat_zip('ZTAC5 91765')
-        91765
-    """
-    return x[6:11]
-
-def reformat_income(x):
-    """
-    Reformats and converts to int, string representations of median household incomes
-
-    Parameters
-    ----------
-    x: str
-        String representation of median household income
-
-    Returns
-    -------
-    str:
-        Cleaned integer representation of median household income
-
-    Example
-    -------
-        >>> reformat_income('250,000+')
-        250000
-    """
-    x = x.replace('+', '')
-    return int(x.replace(',', ''))
+from data_processing_helpers import reformat_zip
+from data_processing_helpers import reformat_income
 
 def process_hh(data, year, params):
     """

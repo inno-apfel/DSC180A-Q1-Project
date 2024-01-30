@@ -1,21 +1,10 @@
+import sys
+sys.path.insert(0, 'src/helper')
+
 import numpy as np
 import pandas as pd
 
-def reformat_zip(x):
-    """
-    Reformats ZIP Codes from Census 5-Digit ZIP Code Tabulation Area (ZCTA5) format to simple 5-Digit representation.
-
-    Parameters
-    ----------
-    x: str
-        ZIP code represented in the format 'ZCTA5 XXXXX'
-
-    Returns
-    -------
-    str:
-        ZIP code in 5-digit representation (XXXXX)
-    """
-    return x[6:11]
+from data_processing_helpers import reformat_zip
 
 def process_household_counts_data(data, year, params):
     """

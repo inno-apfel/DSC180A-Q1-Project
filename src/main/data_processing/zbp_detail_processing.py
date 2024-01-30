@@ -1,29 +1,10 @@
+import sys
+sys.path.insert(0, 'src/helper')
+
 import numpy as np
 import pandas as pd
 
-def is_2dig_naics(naics_code):
-    """
-    Checks if a given NAICS code string is a 2-digit NAICS code
-
-    Parameters
-    ----------
-    naics_code: str
-        String representation of an NAICS code
-        Expected to range from 2-digit to 5-digit representations 
-
-    Returns
-    -------
-    boolean:
-        Whether or not the input string is a valid 2-digit NAICS code
-
-    Example
-    -------
-        >>> is_2dig_naics('236///')
-        False
-        >>> is_2dig_naics('23----')
-        True
-    """
-    return naics_code[:2].isnumeric() and not any(char.isdigit() for char in naics_code[2:])
+from data_processing_helpers import is_2dig_naics
 
 def process_zbp_data(data, year, params):
     """

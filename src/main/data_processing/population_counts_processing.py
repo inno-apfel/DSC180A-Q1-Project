@@ -1,30 +1,11 @@
+import sys
+sys.path.insert(0, 'src/helper')
+
 import numpy as np
 import pandas as pd
 
-def reformat_pop(x):
-    """
-    Reformats and converts to int, string representations of population counts
-
-    Parameters
-    ----------
-    x: str
-        String representation of population count
-
-    Returns
-    -------
-    str:
-        Cleaned integer representation of population count
-
-    Example
-    -------
-        >>> reformat_pop('1,234')
-        1234
-    """
-    return float(x.replace(',', ''))
-
-# Reformats zip column to be  5 digit zip code
-def reformat_zip(x):
-    return x[6:11]
+from data_processing_helpers import reformat_zip
+from data_processing_helpers import reformat_pop
 
 def process_pop(data, year, params):
     """
