@@ -4,7 +4,7 @@ import json
 import plotly.express as px
 from IPython.display import IFrame
 
-def generate_zbp_chloropleth(data, group, value, tag):
+def generate_zbp_chloropleth(data, group, value, outpath):
     """
     Generates a chloropleth map of the USA by ZIP Code
 
@@ -39,4 +39,4 @@ def generate_zbp_chloropleth(data, group, value, tag):
                         scope="usa",
                         labels={'Final_Labels':'Cluster_Category'})
     fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
-    fig.write_html(f'out/plots/zbp_plot_{tag}.html')
+    fig.write_html(outpath)

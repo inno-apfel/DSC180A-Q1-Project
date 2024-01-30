@@ -116,7 +116,7 @@ def visualize_predictions(preds, year, model_name):
     """
     preds = preds[preds['year'] == year]
     preds = preds[['zip', 'emp_pred']]
-    zbp_visualizer.generate_zbp_chloropleth(preds, 'zip', 'emp_pred', f'{model_name}_{year}_preds')
+    zbp_visualizer.generate_zbp_chloropleth(preds, 'zip', 'emp_pred', f'out/plots/zbp_plot_{model_name}_{year}_preds.html')
 
 def eval_sandag_s14(year_up_to, data):
     """
