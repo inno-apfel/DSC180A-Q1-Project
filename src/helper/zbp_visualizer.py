@@ -38,5 +38,6 @@ def generate_zbp_chloropleth(data, group, value, outpath):
                         featureidkey="properties.ZCTA5CE10",
                         scope="usa",
                         labels={'Final_Labels':'Cluster_Category'})
+    fig.update_geos(fitbounds="locations", visible=False)
     fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
     fig.write_html(outpath)
