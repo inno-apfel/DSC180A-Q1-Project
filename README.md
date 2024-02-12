@@ -28,6 +28,8 @@ To begin running our models, you must first replicate our virtual enviroment. To
    conda activate dsc180-capstone
    ```
 
+3. Install Tensorflow with the following [instructions](https://www.tensorflow.org/install/pip#windows-native)
+
 
 ## Retrieving the Data Locally:
 
