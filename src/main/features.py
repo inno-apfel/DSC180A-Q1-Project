@@ -55,19 +55,28 @@ def run():
     zbp_totals_with_features.to_csv('src/data/temp/zbp_totals_with_features.csv', index=False)
 
     # create lagged dataset
-    def lag_all_zip_codes(data, cols_not_to_lag):
-        def create_lagged_dataset(data, cols_not_to_lag):
+    def lag_all_zip_codes(data, cols_not_to_lag, cols_to_lag_and_keep = None, years_to_lag=1):
+
+        def create_lagged_dataset(data, cols_not_to_lag, cols_to_lag_and_keep, years_to_lag):
             cols_to_lag = data.columns.drop(cols_not_to_lag)
-            return data[cols_not_to_lag].join(data[cols_to_lag].shift(1), how='inner')
+            if cols_to_lag_and_keep is not None:
+                cols_to_lag = cols_to_lag.append(pd.Index(cols_to_lag_and_keep))
+            lagged_data = data[cols_to_lag].shift(years_to_lag)
+            if cols_to_lag_and_keep is not None:
+                lagged_data = lagged_data.rename(columns={col:col+f'_lag_{years_to_lag}' for col in cols_to_lag_and_keep})
+            return data[cols_not_to_lag].join(lagged_data, how='inner')
+        
         temp = []
+        
         for curr_zip in data['zip'].unique():
+            
             curr_zip_data = data[data['zip']==curr_zip].sort_values('year')
-            temp += [create_lagged_dataset(curr_zip_data, cols_not_to_lag).iloc[1:,:]]
+            temp += [create_lagged_dataset(curr_zip_data, cols_not_to_lag, cols_to_lag_and_keep=cols_to_lag_and_keep, years_to_lag=years_to_lag).iloc[years_to_lag:,:]]
             
         return pd.concat(temp, ignore_index=True).reset_index(drop=True)
     
     data = pd.read_csv('src/data/temp/zbp_totals_with_features.csv')
-    lagged = lag_all_zip_codes(data, ['zip', 'year', 'est'])
+    lagged = lag_all_zip_codes(data, ['zip', 'year', 'est'], ['est'])
     lagged.to_csv('src/data/temp/lagged_zbp_totals_with_features.csv', index=False)
 
 
