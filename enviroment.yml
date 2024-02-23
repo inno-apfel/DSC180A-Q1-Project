@@ -1,4 +1,4 @@
-﻿name: dsc180-capstone-temp2
+﻿name: dsc180-capstone
 channels:
   - defaults
   - conda-forge
