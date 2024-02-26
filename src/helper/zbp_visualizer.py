@@ -24,7 +24,7 @@ def generate_zbp_chloropleth(data, group, value, outpath):
     zbp_plot_{tag}: HTML file
         The generated chloropleth map
     """
-    df = data.groupby(group)[value].sum().reset_index()[[group, value]]
+    df = data.groupby(group)[value].mean().reset_index()[[group, value]]
     
     with urlopen('https://raw.githubusercontent.com/OpenDataDE/State-zip-code-GeoJSON/master/ca_california_zip_codes_geo.min.json') as response:
         zipcodes = json.load(response)
