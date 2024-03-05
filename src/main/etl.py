@@ -56,7 +56,7 @@ def run(params):
         zbp_totals_by_year[year] = pd.read_csv(f'src/data/raw/zbp_data/zbptotals/zbp{shortened_year}totals/zbp{shortened_year}totals.txt', encoding=totals_encoding)
         hh_income_by_year[year] = pd.read_csv(f'src/data/raw/household_data/ACSST5Y{year}.csv')
         total_pop_by_year[year] = pd.read_csv(f'src/data/raw/pop_age_data/ACSDP5Y{year}.csv')
-        retire_by_year[year] = pd.read_csv(f'src/data/raw/retire_data/pop{year}.csv')
+        retire_by_year[year] = pd.read_csv(f'src/data/raw/retire_data/ACSDP5Y{year}.DP05-Data.csv')
         household_counts_by_year[year] = pd.read_csv(f'src/data/raw/acs_data/household_counts_data/household_counts_{year}.csv', skiprows=1)
     unemployment_by_year = pd.read_csv('src/data/raw/employment_data/employment.csv')
 
