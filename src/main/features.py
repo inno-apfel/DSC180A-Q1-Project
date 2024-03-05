@@ -81,7 +81,7 @@ def run():
 
     # create dataset for change in # est since last year
     lagged['change_in_est'] = lagged['est'] - lagged['est_lag_1']
-    lagged.drop(columns=['est'])
+    lagged = lagged.drop(columns=['est'])
     lagged.to_csv('src/data/temp/change_in_est_zbp_totals_with_features.csv', index=False)
 
 
