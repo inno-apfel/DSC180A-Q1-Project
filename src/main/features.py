@@ -79,6 +79,11 @@ def run():
     lagged = lag_all_zip_codes(data, ['zip', 'year', 'est'], ['est'])
     lagged.to_csv('src/data/temp/lagged_zbp_totals_with_features.csv', index=False)
 
+    # create dataset for change in # est since last year
+    lagged['change_in_est'] = lagged['est'] - lagged['est_lag_1']
+    lagged.drop(columns=['est'])
+    lagged.to_csv('src/data/temp/change_in_est_zbp_totals_with_features.csv', index=False)
+
 
 if __name__ == '__main__':
     run()
