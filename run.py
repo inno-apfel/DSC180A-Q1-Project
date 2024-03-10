@@ -9,6 +9,7 @@ sys.path.insert(0, 'src/main')
 import etl
 import features
 import models
+import clean
 
 def main(targets):
     '''
@@ -39,6 +40,12 @@ def main(targets):
     if run_all or ('models' in targets):
         print('currently running: model training and evaluation')
         models.run()
+        print('DONE')
+        print()
+    
+    if 'clean' in targets:
+        print('currently running: deleting all temp files')
+        clean.run()
         print('DONE')
         print()
 
