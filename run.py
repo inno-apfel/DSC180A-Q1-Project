@@ -9,6 +9,7 @@ sys.path.insert(0, 'src/main')
 import etl
 import features
 import models
+import forecast
 import clean
 
 def main(targets):
@@ -42,6 +43,13 @@ def main(targets):
         models.run()
         print('DONE')
         print()
+
+    if run_all or ('forecast' in targets):
+        print('currently running: forecasting for year 2050')
+        forecast.run()
+        print('DONE')
+        print()
+    
     
     if 'clean' in targets:
         print('currently running: deleting all temp files')
