@@ -74,7 +74,7 @@ To use our forecasting models, run the `run.py` script from your terminal with t
      - `out/plots`
 - `all`: run the above targets, except `clean`, in sequential order
 
-notes: stable versions of saved models are included by default, run `clean` to delete them if you wish
+notes: stable versions of saved models are included by default, run `clean` to delete them before re-training
 
   
 ## Contributors
