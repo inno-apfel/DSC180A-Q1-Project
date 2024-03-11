@@ -26,8 +26,6 @@ from mlxtend.feature_selection import SequentialFeatureSelector
 
 import tensorflow as tf
 
-from tqdm import tqdm
-
 from arima_forecast import ARIMAForecast
 from window_generator import WindowGenerator
 
@@ -153,7 +151,7 @@ def compile_and_fit(model, data_train_by_zc, data_test_by_zc, num_epochs, train_
                   optimizer=tf.keras.optimizers.Adam(),
                   metrics=[tf.keras.losses.MeanSquaredError()])
     
-    for epoch in tqdm(np.arange(num_epochs)):
+    for epoch in np.arange(num_epochs):
         
         if (len(losses) >= 2) and (np.abs(losses[-1] - losses[-2]) < 0.1):
             patience -= 1
@@ -266,8 +264,8 @@ def run():
 
     # Random Forest
 
-    param_grid = {'n_estimators': [50], 
-                  'max_depth': [50]}
+    param_grid = {'n_estimators': [10, 20, 30, 40, 50], 
+                  'max_depth': [10, 20, 30, 40, 50]}
     
     short_rf_filepath = 'out/models/short_rf.pkl'
     short_rf_fitted = False
