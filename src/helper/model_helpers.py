@@ -1,3 +1,5 @@
+import sys
+
 import numpy as np
 import pandas as pd
 import tensorflow as tf
@@ -6,6 +8,9 @@ from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import mean_squared_error
+
+sys.path.insert(0, 'src/helper')
+from custom_tcsv import CustomTimeSeriesSplit
 
 
 def train_test_split_by_year(data, end_year):
@@ -259,7 +264,7 @@ def run_grid_search(data_train, data_test, included_feats, model, param_grid):
         included_feats = data_train.columns.drop(['est'])
     X_train = data_train[included_feats]
     y_train = data_train['est']
-    grid_search = GridSearchCV(model, param_grid, scoring = 'neg_root_mean_squared_error', n_jobs = -1)
+    grid_search = GridSearchCV(model, param_grid,cv = CustomTimeSeriesSplit(), scoring = 'neg_root_mean_squared_error', n_jobs = -1)
     grid_search.fit(X_train, y_train)
     return grid_search
 
