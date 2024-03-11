@@ -312,37 +312,37 @@ def run():
     
     # LSTM (5-in 5-out)
 
-    short_lstm_filepath = 'out/models/short_lstm_model.keras'
+    short_lstm_filepath = 'out/models/short_lstm_model_weights.tf'
+    short_lstm_model = tf.keras.models.Sequential([
+            # Shape [batch, time, features] => [batch, time, lstm_units]
+            tf.keras.layers.LSTM(256, return_sequences=True),
+            # Shape => [batch, time, features]
+            tf.keras.layers.Dense(units=1)
+        ])
     try:
-        short_lstm_model = tf.keras.models.load_model(short_lstm_filepath, compile=False)
+        short_lstm_model.load_weights(short_lstm_filepath).expect_partial()
         short_lstm_model.compile(loss=tf.keras.losses.MeanSquaredError(),
                                  optimizer=tf.keras.optimizers.Adam(),
                                  metrics=[tf.keras.losses.MeanSquaredError()])
     except:
-        short_lstm_model = tf.keras.models.Sequential([
+        losses, val_losses = model_helpers.compile_and_fit(short_lstm_model, wide_short_data_train_by_zc_tf, wide_short_data_test_by_zc_tf, MAX_EPOCHS, short_train_mean, short_train_std)
+        short_lstm_model.save_weights(short_lstm_filepath)
+
+    long_lstm_filepath = 'out/models/long_lstm_model_weights.tf'
+    long_lstm_model = tf.keras.models.Sequential([
             # Shape [batch, time, features] => [batch, time, lstm_units]
             tf.keras.layers.LSTM(256, return_sequences=True),
             # Shape => [batch, time, features]
             tf.keras.layers.Dense(units=1)
         ])
-        losses, val_losses = model_helpers.compile_and_fit(short_lstm_model, wide_short_data_train_by_zc_tf, wide_short_data_test_by_zc_tf, MAX_EPOCHS, long_train_mean, long_train_std)
-        short_lstm_model.save(short_lstm_filepath)
-
-    long_lstm_filepath = 'out/models/long_lstm_model.keras'
     try:
-        long_lstm_model = tf.keras.models.load_model(long_lstm_filepath, compile=False)
+        long_lstm_model.load_weights(long_lstm_filepath, compile=False).expect_partial()
         long_lstm_model.compile(loss=tf.keras.losses.MeanSquaredError(),
                                 optimizer=tf.keras.optimizers.Adam(),
                                 metrics=[tf.keras.losses.MeanSquaredError()])
     except:
-        long_lstm_model = tf.keras.models.Sequential([
-            # Shape [batch, time, features] => [batch, time, lstm_units]
-            tf.keras.layers.LSTM(256, return_sequences=True),
-            # Shape => [batch, time, features]
-            tf.keras.layers.Dense(units=1)
-        ])
         losses, val_losses = model_helpers.compile_and_fit(long_lstm_model, wide_long_data_train_by_zc_tf, wide_long_data_test_by_zc_tf, MAX_EPOCHS, long_train_mean, long_train_std)
-        long_lstm_model.save(long_lstm_filepath)
+        long_lstm_model.save_weights(long_lstm_filepath)
 
     # EVALUATE MODELS
         
