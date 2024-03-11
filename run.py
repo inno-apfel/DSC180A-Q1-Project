@@ -86,7 +86,7 @@ def main(targets):
 
     if run_all or ('forecast' in targets):
         print()
-        forecast_year = int(input(indent + 'generate lstm forecasts up to (year>2018): '))
+        forecast_year = int(input(indent + 'generate lstm forecasts up to (ex: 2050): '))
         curr_task = 'generating forecasts:'
         print()
         spinner_animation.show(curr_task, finish_message=f'{curr_task} done', failed_message=f'{curr_task} failed')
