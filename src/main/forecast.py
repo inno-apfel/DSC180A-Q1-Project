@@ -203,7 +203,7 @@ def run(forecast_year=2050):
             with open(modelpath,'rb') as f:
                 model = pickle.load(f)
         else:
-            raise Exception("model not available")
+            raise FileNotFoundError("    FileNotFoundError: Make sure to run 'models' before 'forecast'")
         
         if isinstance(model, ARIMAForecast):
             final_preds = model.forecast(data_test['year'].max())

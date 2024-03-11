@@ -83,8 +83,13 @@ def main(targets):
         curr_task = 'generating forecasts:'
         print()
         spinner_animation.show(curr_task, finish_message=f'{curr_task} done', failed_message=f'{curr_task} failed')
-        forecast.run(forecast_year)
-        spinner_animation.finished = True
+        try:
+            forecast.run(forecast_year)
+            spinner_animation.finished = True
+        except Exception as e:
+            spinner_animation.failed = True
+            print(e)
+            return ...
         print()
         print(indent, f"non-lstm forecast plots located at 'out/plots/model_year_zcta_forecast.jpg'")
         print()
