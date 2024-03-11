@@ -17,8 +17,9 @@ This repository serves as a working codebase for our machine learning employment
 
 There are currently two ways you can interact with our work:
 
-1. Exploring our work through our development interactive python notebooks
-2. Interacting with our executable script `run.py` 
+1. Interacting with our executable script `run.py` (recommended)
+2. Exploring our work through our development interactive python notebooks
+   - note disclosures in `notebooks/README.md` before reading/running
 
 
 ## Setting up the Enviroment
