@@ -1,0 +1,2 @@
+model_checkpoint_path: "long_lstm_model_weights.tf"
+all_model_checkpoint_paths: "long_lstm_model_weights.tf"
