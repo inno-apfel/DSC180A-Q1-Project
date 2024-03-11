@@ -79,14 +79,18 @@ def main(targets):
     if run_all or ('forecast' in targets):
         # accept year input
         print()
-        forecast_year = input(indent + 'generate lstm forecasts up to (year>2018): ')
+        forecast_year = int(input(indent + 'generate lstm forecasts up to (year>2018): '))
         curr_task = 'generating forecasts:'
         print()
         spinner_animation.show(curr_task, finish_message=f'{curr_task} done', failed_message=f'{curr_task} failed')
         forecast.run(forecast_year)
         spinner_animation.finished = True
         print()
-        print(indent, f"forecasts out to {forecast_year} located at 'out/plots/feedback_{forecast_year}_forecasts.jpg'")
+        print(indent, f"non-lstm forecast plots located at 'out/plots/model_year_zcta_forecast.jpg'")
+        print()
+        print(indent, f"non-lstm forecast tables located at 'out/forecast_tables/model_zcta_forecast.csv'")
+        print()
+        print(indent, f"lstm forecasts out to {forecast_year} located at 'out/plots/feedback_{forecast_year}_forecasts.jpg'")
     
     if run_all or ('clean' in targets):
         curr_task = 'removing temporary files:'

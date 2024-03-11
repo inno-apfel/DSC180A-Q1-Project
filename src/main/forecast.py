@@ -20,6 +20,11 @@ from tqdm import tqdm
 from feedback import FeedBack
 from window_generator import WindowGenerator
 
+from zbp_visualizer import generate_zbp_chloropleth
+from arima_forecast import ARIMAForecast
+
+import pickle
+
 
 MAX_EPOCHS = 50
 
@@ -157,25 +162,78 @@ def run(forecast_year=2050):
 
     data_file_path = 'src/data/temp/zbp_totals_with_features.csv'
     data = pd.read_csv(data_file_path)
+    lagged_data_file_path = 'src/data/temp/lagged_zbp_totals_with_features.csv'
+    lagged_data = pd.read_csv(lagged_data_file_path)
     
     # Process Data
 
     data = data.drop(columns=data.select_dtypes(exclude=['int64', 'float64']).columns)
+    lagged_data = lagged_data.drop(columns=lagged_data.select_dtypes(exclude=['int64', 'float64']).columns)
 
     end_year = 2020
     short_data_train, short_data_test = train_test_split_by_year(data, end_year)
+    short_lagged_data_train, short_lagged_data_test = train_test_split_by_year(lagged_data, end_year)
 
     end_year = 2018
     long_data_train, long_data_test = train_test_split_by_year(data, end_year)
+    long_lagged_data_train, long_lagged_data_test = train_test_split_by_year(lagged_data, end_year)
 
     short_std_data_train, short_std_data_test, short_train_stats = standardize_data(short_data_train, short_data_test)
     short_train_mean, short_train_std = short_train_stats
+
+    short_lagged_std_data_train, short_lagged_std_data_test, short_lagged_train_stats = standardize_data(short_lagged_data_train, short_lagged_data_test)
+    short_lagged_train_mean, short_lagged_train_std = short_lagged_train_stats
+
+    long_lagged_std_data_train, long_lagged_std_data_test, long_lagged_train_stats = standardize_data(long_lagged_data_train, long_lagged_data_test)
+    long_lagged_train_mean, long_lagged_train_std = long_lagged_train_stats
 
     long_std_data_train, long_std_data_test, long_train_stats = standardize_data(long_data_train, long_data_test)
     long_train_mean, long_train_std = long_train_stats
 
     short_ohe_data_train, short_ohe_data_test = convert_to_ohe(short_std_data_train, short_std_data_test)
     long_ohe_data_train, long_ohe_data_test = convert_to_ohe(long_std_data_train, long_std_data_test)
+
+    short_lagged_ohe_data_train, short_lagged_ohe_data_test = convert_to_ohe(short_lagged_std_data_train, short_lagged_std_data_test)
+    long_lagged_ohe_data_train, long_lagged_ohe_data_test = convert_to_ohe(long_lagged_std_data_train, long_lagged_std_data_test)
+
+    # GENERATE ZBP PLOTS FOR MODELS
+
+    def load_predict_plot(model_name, modelpath, data_test, non_ohe_data_test, train_mean, train_std):
+        if os.path.isfile(modelpath):
+            with open(modelpath,'rb') as f:
+                model = pickle.load(f)
+        else:
+            raise Exception("model not available")
+        
+        if isinstance(model, ARIMAForecast):
+            final_preds = model.forecast(data_test['year'].max())
+        else:
+            X_test = data_test.drop(columns=['est'])
+            y_test = data_test['est']
+            non_ohe_X_test = non_ohe_data_test.drop(columns=['est'])
+            non_ohe_X_test['est'] = model.predict(X_test)
+            final_preds = unstandardize_series(non_ohe_X_test, train_mean, train_std)[['zip', 'year', 'est']]
+
+        final_preds.to_csv(f'out/forecast_tables/{model_name}_zcta_forecast.csv', index=False)
+        final_year = final_preds['year'].unique().max()
+        final_preds = final_preds[final_preds['year']==final_year]
+        generate_zbp_chloropleth(final_preds, 'zip', 'est', f'out/plots/{model_name}_{int(final_year)}_zcta_forecast.html')
+
+    load_predict_plot('lin_reg', 'out/models/short_lr.pkl', 
+                      short_lagged_ohe_data_test, short_lagged_std_data_test,
+                      short_lagged_train_mean, short_lagged_train_std)
+    
+    load_predict_plot('lasso', 'out/models/short_rf.pkl', 
+                      short_lagged_ohe_data_test, short_lagged_std_data_test,
+                      short_lagged_train_mean, short_lagged_train_std)
+    
+    load_predict_plot('random_forest', 'out/models/short_lasso.pkl', 
+                      short_lagged_ohe_data_test, short_lagged_std_data_test,
+                      short_lagged_train_mean, short_lagged_train_std)
+    
+    load_predict_plot('arima', 'out/models/short_arima.pkl', 
+                      short_data_test, None,
+                      None, None)
 
     # Windows
 
