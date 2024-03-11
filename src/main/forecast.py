@@ -148,7 +148,7 @@ def sum_auto_wide_plot_model(model, wide_data, window, extra_steps, train_mean, 
     
     return total_inputs, total_preds
 
-def run():
+def run(forecast_year=2050):
     """
     Lorem Ipsum
     """
@@ -218,7 +218,7 @@ def run():
 
     # Plot Forecasts
         
-    last_pred_year  = 2050
+    last_pred_year  = forecast_year
     auto_regressive_steps = last_pred_year-2017
 
     short_feedback_sum_inputs, short_feedback_sum_preds = sum_auto_wide_plot_model(short_feedback_model, multi_wide_long_data_train_by_zc_tf, multi_window, auto_regressive_steps, long_train_mean, long_train_std)

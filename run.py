@@ -42,7 +42,7 @@ def main(targets):
         params = json.load(fh)
 
     run_all = False
-    if 'all' in targets: # targets: data, features, models, forcast, clean, all
+    if 'all' in targets: # target options: data, features, models, forecast, clean, all
         run_all = True
 
     if run_all or ('data' in targets):
@@ -77,13 +77,16 @@ def main(targets):
         print(indent, "3-year out forecast located at 'out/plots/final_forecasts.jpg'")
 
     if run_all or ('forecast' in targets):
+        # accept year input
+        print()
+        forecast_year = input(indent + 'generate lstm forecasts up to (year>2018): ')
         curr_task = 'generating forecasts:'
         print()
         spinner_animation.show(curr_task, finish_message=f'{curr_task} done', failed_message=f'{curr_task} failed')
-        forecast.run()
+        forecast.run(forecast_year)
         spinner_animation.finished = True
         print()
-        print(indent, "forecasts out to 2050 located at 'out/plots/feedback_2050_forecats.jpg'")
+        print(indent, f"forecasts out to {forecast_year} located at 'out/plots/feedback_{forecast_year}_forecasts.jpg'")
     
     if run_all or ('clean' in targets):
         curr_task = 'removing temporary files:'
