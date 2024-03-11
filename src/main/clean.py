@@ -17,7 +17,7 @@ def run():
     Lorem Ipsum
     """
 
-    for folder in ['out/plots', 'out/models', 'data/temp']:
+    for folder in ['data/temp', 'out/plots', 'out/models', 'out/forecast_tables']:
         empty_folder(folder)
         f = open(folder + '/.gitkeep', 'w')
         f.close()
