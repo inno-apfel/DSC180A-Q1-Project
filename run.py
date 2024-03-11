@@ -17,9 +17,17 @@ import models
 import forecast
 import clean
 
-import time
-
 def print_df_indented(df_string, indent):
+    """
+    Helper function to print a DataFrame with indentation.
+    
+    Parameters
+    ----------
+    df_string: str
+        String representation of the DataFrame.
+    indent: str
+        Indentation string.
+    """
     end_of_col_names = df_string.index('\n')
     col_names = df_string[:end_of_col_names]
     remaining_rows = df_string[end_of_col_names + 1:]
@@ -30,10 +38,10 @@ def print_df_indented(df_string, indent):
 
 
 def main(targets):
-    '''
+    """
     Runs the main project pipeline logic, given the targets.
     targets must contain: 'all'. 
-    '''
+    """
 
     spinner_animation = AnimationLoader()
     indent = '    '
@@ -77,7 +85,6 @@ def main(targets):
         print(indent, "3-year out forecast located at 'out/plots/final_forecasts.jpg'")
 
     if run_all or ('forecast' in targets):
-        # accept year input
         print()
         forecast_year = int(input(indent + 'generate lstm forecasts up to (year>2018): '))
         curr_task = 'generating forecasts:'

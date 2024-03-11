@@ -1,11 +1,9 @@
 import sys
 import json
 
-sys.path.insert(0, 'src/main/data_processing')
-
-import numpy as np
 import pandas as pd
 
+sys.path.insert(0, 'src/main/data_processing')
 import zbp_detail_processing
 import zbp_totals_processing
 import household_income_processing
