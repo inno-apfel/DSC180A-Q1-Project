@@ -144,7 +144,7 @@ def run(forecast_year=2050):
                                     metrics=[tf.keras.losses.MeanSquaredError()])
     except:
         long_feedback_model = FeedBack(units=256, out_steps=OUT_STEPS, num_features=long_ohe_data_train.shape[1])
-        losses, val_losses = model_helpers.compile_and_fit(long_feedback_model, multi_wide_long_data_train_by_zc_tf, multi_wide_long_data_test_by_zc_tf, MAX_EPOCHS)
+        losses, val_losses = model_helpers.compile_and_fit(long_feedback_model, multi_wide_long_data_train_by_zc_tf, multi_wide_long_data_test_by_zc_tf, MAX_EPOCHS, long_train_mean, long_train_std)
         long_feedback_model.save_weights(long_feedback_model_filepath)
 
     # GENERATE REGION LEVEL VISUALIZATIONS FOR LSTM
