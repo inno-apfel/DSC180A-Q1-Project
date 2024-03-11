@@ -1,13 +1,24 @@
-# Employment Growth Forecasting using U.S. Census Data
+<h1 align='left'>
+  Forecasting Regional Aggregate Establishment Birth-Death Values: Using Algorithmic Modeling
+</h1>
+
+<h3 align="center">
+  <img src="https://datascience.ucsd.edu/wp-content/uploads/2022/09/UCSanDiego_Halicioglu_BlueGold.png", width=450>
+  <br>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/b/b9/SANDAG_logo.png", width=450>
+  <br>
+</h3>
+
+
 
 ## Overview
 
-This repository serves as a working codebase for our machine learning employment forecasting models, developed in partnership with The San Diego Association of Government (SANDAG).
+This repository serves as a working codebase for our machine learning employment forecasting models, developed in partnership with The San Diego Association of Government (SANDAG). Using various python machine learning packages, we trained and evaluated candidate modeling architectures to forecast establishment growth in the San Diego County.
 
 There are currently two ways you can interact with our work:
 
 1. Exploring our work through our development interactive python notebooks
-2. Interacting with our executable script `run.py` to recreate the results we found in `report.pdf`.
+2. Interacting with our executable script `run.py` 
 
 
 ## Setting up the Enviroment
@@ -42,7 +53,7 @@ Last Updated: 03/10/2024
 
 To use our forecasting models, run the `run.py` script from your terminal with the following targets:
 - `data`: load and process the data according to `config.json`
-  - by default, models are trained and evaluated on data for the San Diego region between 2012-2021
+  - by default, models are trained and evaluated on data for the San Diego region between 2012-2021, recreating our results in `report.pdf`
   - update `config.json` to include relavent zip-codes and years if you choose to explore different regions or year ranges.
 - `features`: build the neccessary features for our models
 - `models`:
