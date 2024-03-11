@@ -1,4 +1,4 @@
-﻿name: dsc180-capstone
+﻿name: regional-business-growth-forecasting
 channels:
   - defaults
   - conda-forge
@@ -20,4 +20,4 @@ dependencies:
       - statsmodels==0.14.0
       - tensorflow==2.10.1
       - tqdm==4.66.1
-prefix: C:\Users\Innominandum\anaconda3\envs\dsc180-capstone
+prefix: C:\Users\Innominandum\anaconda3\envs\regional-business-growth-forecasting

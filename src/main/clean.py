@@ -24,7 +24,7 @@ def run():
     """
     Main function that iterates over predefined folders, empties them, and creates .gitkeep file.
     """
-    for folder in ['data/temp', 'out/plots', 'out/models', 'out/forecast_tables']:
+    for folder in ['src/data/temp', 'out/plots', 'out/models', 'out/forecast_tables']:
         empty_folder(folder)
         f = open(folder + '/.gitkeep', 'w')
         f.close()
