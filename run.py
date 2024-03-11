@@ -49,7 +49,7 @@ def main(targets):
         curr_task = 'loading data:'
         print()
         spinner_animation.show(curr_task, finish_message=f'{curr_task} done', failed_message=f'{curr_task} failed')
-        time.sleep(2) # etl.run(params)
+        etl.run(params)
         spinner_animation.finished = True
         print()
         print(indent, "loaded data located at 'src/data/temp'")
@@ -58,7 +58,7 @@ def main(targets):
         curr_task = 'transforming features:'
         print()
         spinner_animation.show(curr_task, finish_message=f'{curr_task} done', failed_message=f'{curr_task} failed')
-        time.sleep(2) #features.run()
+        features.run()
         spinner_animation.finished = True
         print()
         print(indent, "proccessed data located at 'src/data/temp'")
@@ -67,7 +67,7 @@ def main(targets):
         curr_task = 'training-evaluating models:'
         print()
         spinner_animation.show(curr_task, finish_message=f'{curr_task} done', failed_message=f'{curr_task} failed')
-        time.sleep(2) #models.run()
+        models.run()
         spinner_animation.finished = True
         print()
         model_evaluations_df = pd.read_csv('src/data/temp/model_evaluations.csv')
@@ -80,16 +80,16 @@ def main(targets):
         curr_task = 'generating forecasts:'
         print()
         spinner_animation.show(curr_task, finish_message=f'{curr_task} done', failed_message=f'{curr_task} failed')
-        time.sleep(2) #forecast.run()
+        forecast.run()
         spinner_animation.finished = True
         print()
         print(indent, "forecasts out to 2050 located at 'out/plots/feedback_2050_forecats.jpg'")
     
-    if 'clean' in targets:
+    if run_all or ('clean' in targets):
         curr_task = 'removing temporary files:'
         print()
         spinner_animation.show(curr_task, finish_message=f'{curr_task} done', failed_message=f'{curr_task} failed')
-        time.sleep(2) #clean.run()
+        clean.run()
         spinner_animation.finished = True
 
     print()
