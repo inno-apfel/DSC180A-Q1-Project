@@ -60,7 +60,8 @@ To use our forecasting models, run the `run.py` script from your terminal with t
 - `features`: build the neccessary features for our models
 - `models`:
   1. train and evaluate our forecasting models for immediate-next-year and long-term forecasting
-  3. generate comparison visualization of model forecasts on test data
+  2. generate comparison visualization of model forecasts on test data
+
 - `forecast`:
   - generate chloropleth maps for model forecasts on last year in test data
   - generate region level forecasts from end of training data up to a user input year
@@ -71,9 +72,9 @@ To use our forecasting models, run the `run.py` script from your terminal with t
      - `out/forecast_tables`
      - `out/models`
      - `out/plots`
+- `all`: run the above targets, except `clean`, in sequential order
 
-
-- `all`: run the above targets in sequential order
+notes: stable versions of saved models are included by default, run `clean` to delete them if you wish
 
   
 ## Contributors
