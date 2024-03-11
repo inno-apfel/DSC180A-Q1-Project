@@ -43,6 +43,10 @@ def main(targets):
     targets must contain: 'all'. 
     """
 
+    for target in targets:
+        if target not in ['data', 'features', 'models', 'forecast', 'clean', 'all']:
+            raise Exception('TargetNotFoundException: input at least one valid target')
+
     spinner_animation = AnimationLoader()
     indent = '    '
 
