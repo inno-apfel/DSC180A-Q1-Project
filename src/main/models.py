@@ -548,8 +548,7 @@ def run():
     evals_df = pd.DataFrame(eval_info, columns=['model', 
                                                 'short-term train rmse', 'short-term test rmse',
                                                 'long-term train rmse', 'long-term test rmse'])
-    
-    print(evals_df)
+    evals_df.to_csv('src/data/temp/model_evaluations.csv', index=False)
     
     # Vis Test Predictions
 
@@ -597,8 +596,6 @@ def run():
 
     final_forecasts_plot_filepath = 'out/plots/final_forecasts.jpg'
     plt.savefig(final_forecasts_plot_filepath, dpi=500, bbox_inches='tight', pad_inches=0)
-
-    print(f'View final test forecast visualization at: {final_forecasts_plot_filepath}')
 
 if __name__ == '__main__':
     run()

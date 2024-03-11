@@ -237,7 +237,5 @@ def run():
     plt.plot(long_feedback_preds_indicies, long_feedback_sum_preds, marker='X', color='#ff7f0e')
     plt.savefig(f'out/plots/long_feedback_{last_pred_year}_forecasts.jpg', dpi=500, bbox_inches='tight', pad_inches=0)
 
-    print(f'View forecasts for year {last_pred_year} in: out/plots/feedback_{last_pred_year}_forecats.jpg')
-
 if __name__ == '__main__':
     run()
