@@ -10,7 +10,7 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import mean_squared_error
 
 sys.path.insert(0, 'src/helper')
-from custom_tcsv import CustomTimeSeriesSplit
+from custom_tscv import CustomTimeSeriesSplit
 
 
 def train_test_split_by_year(data, end_year):
