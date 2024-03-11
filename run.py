@@ -104,7 +104,7 @@ def main(targets):
         print()
         print(indent, f"lstm forecasts out to {forecast_year} located at 'out/plots/feedback_{forecast_year}_forecasts.jpg'")
     
-    if run_all or ('clean' in targets):
+    if 'clean' in targets:
         curr_task = 'removing temporary files:'
         print()
         spinner_animation.show(curr_task, finish_message=f'{curr_task} done', failed_message=f'{curr_task} failed')
