@@ -3,6 +3,7 @@
 </h1>
 
 <h3 align="center">
+  <br>
   <img src="https://datascience.ucsd.edu/wp-content/uploads/2022/09/UCSanDiego_Halicioglu_BlueGold.png", width=450>
   <br>
   <img src="https://upload.wikimedia.org/wikipedia/commons/b/b9/SANDAG_logo.png", width=450>
