@@ -19,7 +19,7 @@ There are currently two ways you can interact with our work:
 
 1. Interacting with our executable script `run.py` (recommended)
 2. Exploring our work through our development interactive python notebooks
-   - note disclosures in `notebooks/README.md` prior to use
+   - note disclosures in `notebooks/README.md`
 
 
 ## Setting up the Enviroment
